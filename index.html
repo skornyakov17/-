@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Сложные переговоры в архитектуре. Интерактивное занятие о стратегиях поведения, границах, изменениях проекта и оплате.">
+  <title>Под давлением — сложные переговоры в архитектуре</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data/content.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <canvas id="pressure-field" aria-hidden="true"></canvas>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="edge edge-left" aria-hidden="true"></div><div class="edge edge-right" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#opening" aria-label="К началу"><span class="brand-mark" aria-hidden="true">ПД<span>↗</span></span><span>ПСИХОЛОГИЯ<br><b>СЛОЖНЫХ ПЕРЕГОВОРОВ</b></span></a>
+    <div class="phase" id="phase"></div>
+    <button class="icon-button" id="help-open" aria-label="Управление и горячие клавиши" title="Управление (H)">?</button>
+  </header>
+  <main id="deck" aria-label="Презентация" tabindex="-1"></main>
+  <footer class="bottom-bar">
+    <div class="speaker" id="speaker"></div>
+    <nav class="navigation" aria-label="Управление презентацией">
+      <button id="previous" class="icon-button" aria-label="Предыдущий слайд" title="Назад (←)">←</button>
+      <button id="overview-open" class="counter" aria-label="Открыть все слайды"><span id="current">01</span><span class="counter-separator">/</span><span id="total">25</span></button>
+      <button id="next" class="icon-button" aria-label="Следующий слайд" title="Дальше (→)">→</button>
+    </nav>
+    <div class="tools">
+      <button id="timer-open" class="timer-button" aria-label="Открыть таймер"><span class="timer-dot"></span><span id="timer-display">00:00</span></button>
+      <button id="motion" class="icon-button motion" aria-label="Отключить анимацию" title="Анимация (M)">≈</button>
+      <button id="fullscreen" class="icon-button" aria-label="Полный экран" title="Полный экран (F)">⛶</button>
+    </div>
+  </footer>
+  <div class="deck-progress" aria-hidden="true"><span id="progress"></span></div>
+  <dialog id="overview" class="overlay overview"><div class="dialog-head"><div><span class="eyebrow">ВЫБЕРИТЕ СЛАЙД</span><h2>Маршрут занятия</h2></div><button class="icon-button close-dialog" aria-label="Закрыть маршрут">×</button></div><div class="overview-grid" id="overview-list"></div></dialog>
+  <dialog id="help" class="overlay help"><div class="dialog-head"><div><span class="eyebrow">В РУКАХ ВЕДУЩЕГО</span><h2>Управление</h2></div><button class="icon-button close-dialog" aria-label="Закрыть управление">×</button></div><div class="key-list"><p><kbd>←</kbd> <kbd>→</kbd> <kbd>Пробел</kbd><span>Предыдущий / следующий слайд</span></p><p><kbd>O</kbd><span>Маршрут и переход к любому слайду</span></p><p><kbd>T</kbd><span>Открыть таймер</span></p><p><kbd>F</kbd><span>Полный экран</span></p><p><kbd>M</kbd><span>Включить / отключить анимацию</span></p><p><kbd>N</kbd><span>Заметки для ведущего</span></p><p><kbd>Esc</kbd><span>Закрыть панель</span></p></div><p class="dialog-note">Переходы и запуск таймера — вручную. На телефоне можно листать свайпом. Результаты теста открывает ведущий.</p></dialog>
+  <dialog id="timer-panel" class="overlay timer-panel"><div class="dialog-head"><div><span class="eyebrow">ВРЕМЯ НА ЗАДАНИЕ</span><h2>Таймер</h2></div><button class="icon-button close-dialog" aria-label="Закрыть таймер">×</button></div><output id="timer-large">00:00</output><div class="timer-actions"><button class="button primary" id="timer-toggle">Запустить</button><button class="button secondary" id="timer-reset">Сбросить</button><button class="button secondary" id="timer-add">+1 мин</button></div><label class="duration-label" for="timer-duration">Продолжительность</label><select id="timer-duration"><option value="60">1 минута</option><option value="120">2 минуты</option><option value="180">3 минуты</option><option value="240">4 минуты</option><option value="300">5 минут</option><option value="360">6 минут</option><option value="600">10 минут</option><option value="1200">20 минут</option></select><p class="dialog-note">По окончании таймера слайд остаётся на экране. При переходе на другой слайд таймер ставится на паузу.</p></dialog>
+  <dialog id="notes" class="overlay notes"><div class="dialog-head"><div><span class="eyebrow">ДЛЯ ВЕДУЩЕГО</span><h2>Сценарий</h2></div><button class="icon-button close-dialog" aria-label="Закрыть заметки">×</button></div><div id="notes-content"></div></dialog>
+  <div class="sr-only" id="announcer" aria-live="polite"></div>
+</body>
+</html>
